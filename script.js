@@ -16,7 +16,6 @@ function updateLivePreview() {
     paymentMethodValue;
 }
 
-// Simplified the DOMContentLoaded logic to avoid duplication
 window.addEventListener("DOMContentLoaded", () => {
   const savedName = localStorage.getItem("savedName");
   const savedPaymentMethod = localStorage.getItem("savedPaymentMethod");
@@ -32,10 +31,20 @@ window.addEventListener("DOMContentLoaded", () => {
       savedPaymentMethod;
   }
 
-  // Set current date in the form and preview
-  const currentDate = "2025-04-16"; // Hardcoded for consistency
-  document.getElementById("date").value = currentDate;
-  document.getElementById("previewDate").textContent = "16/04/2025";
+  // data
+  const currentDate = new Date();
+  document.getElementById("date").value = currentDate
+    .toISOString()
+    .split("T")[0];
+
+  // Format data în DD/MM/YYYY pentru live preview
+  const previewFormattedDate = `${currentDate
+    .getDate()
+    .toString()
+    .padStart(2, "0")}/${(currentDate.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}/${currentDate.getFullYear()}`;
+  document.getElementById("previewDate").textContent = previewFormattedDate;
 });
 
 // Adaugă funcționalitate pentru a adăuga date în tabel și actualizare live
@@ -109,7 +118,6 @@ const canvas = document.getElementById("signatureCanvas");
 const ctx = canvas.getContext("2d");
 let isDrawing = false;
 
-// Ensure proper scaling for high-DPI displays
 const scale = window.devicePixelRatio || 1;
 canvas.width = canvas.offsetWidth * scale;
 canvas.height = canvas.offsetHeight * scale;

@@ -37,14 +37,17 @@
 
         <label for="paymentMethod">Modalitate decontare:</label>
         <select id="paymentMethod" oninput="updateLivePreview()">
-          <option value="Cash">Cash</option>
+          <option value="Numerar">Numerar</option>
           <option value="Transfer bancar">Transfer bancar</option>
         </select>
 
         <div id="tableSection">
           <h2>Adaugă documente</h2>
           <label for="document">Document:</label>
-          <input type="text" id="document" placeholder="Tip document" />
+          <select id="document">
+            <option value="Factura fisc.">Factura fiscala</option>
+            <option value="Bon fisc. CUI">Bon fiscal CUI</option>
+          </select>
 
           <label for="explanation">Explicații:</label>
           <input
@@ -72,11 +75,11 @@
           </div>
         </div>
       </form>
-
+      <button onclick="window.print()">Print PDF</button>
       <div id="livePreview">
         <div class="header">
           <div class="church-info">
-            <p>Biserica Baptista nr. 11</p>
+            <p>Biserica Creștină Baptistă nr. 11</p>
             <p>str. Iugoslaviei nr. 64, Cluj-Napoca</p>
             <p>CUI: 26392200</p>
           </div>
@@ -126,8 +129,6 @@
             </div>
           </div>
         </div>
-
-        <button onclick="window.print()">Print PDF</button>
 
         <footer class="footer">
           <a href="#" class="source-link" target="_blank">source code</a>

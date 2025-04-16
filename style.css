@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   background-color: #f5f5f5;
   min-height: 100vh;
   box-sizing: border-box;
@@ -14,11 +14,11 @@ body {
 
 .container {
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 95%;
+  max-width: 99%;
   box-sizing: border-box;
 }
 
@@ -362,6 +362,7 @@ img[alt="Uploaded Logo"],
 #livePreview .header .church-info {
   font-size: 14px;
   text-align: left;
+  font-weight: bold;
 }
 
 #livePreview table {
@@ -499,4 +500,75 @@ img[alt="Uploaded Logo"],
 .signature {
   width: 100px; /* ajustează dimensiunea după nevoie */
   height: auto;
+}
+
+/* Stilizare pentru combobox-uri */
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f8f8f8;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22%23ccc%22 d%3D%22M2 0L0 2h4zm0 5L0 3h4z%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Stilizare pentru tableSection pentru a se potrivi cu containerul */
+#tableSection {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+#tableSection label {
+  display: block;
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+#tableSection input[type="text"],
+#tableSection input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  margin-bottom: 10px;
+}
+
+#tableSection button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#tableSection button:hover {
+  background-color: #0056b3;
 }
