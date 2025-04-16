@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>PDF Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Decont Unu-Unu</h1>
+
+      <form id="pdfForm">
+        <label for="name">Nume:</label>
+        <input type="text" id="name" placeholder="Introdu numele" oninput="updateLivePreview()" />
+
+        <label for="date">Data:</label>
+        <input type="date" id="date" oninput="updateLivePreview()" />
+
+        <label for="purpose">Scop cheltuieli:</label>
+        <input type="text" id="purpose" placeholder="Introdu scopul cheltuielilor" oninput="updateLivePreview()" />
+
+        <label for="paymentMethod">Modalitate decontare:</label>
+        <select id="paymentMethod" oninput="updateLivePreview()">
+          <option value="Cash">Cash</option>
+          <option value="Transfer bancar">Transfer bancar</option>
+        </select>
+
+        <div id="tableSection">
+          <h2>Adaugă documente</h2>
+          <label for="document">Document:</label>
+          <input type="text" id="document" placeholder="Tip document" />
+
+          <label for="explanation">Explicații:</label>
+          <input type="text" id="explanation" placeholder="Detalii explicații" />
+
+          <label for="amount">Sumă:</label>
+          <input type="number" id="amount" placeholder="Introdu suma" />
+
+          <button type="button" id="addToTable">Adaugă document</button>
+        </div>
+        
+        <div id="signatureSection">
+          <h3>Semnătură</h3>
+          <canvas id="signatureCanvas"style="border: 1px solid #ccc;"></canvas>
+          <div class="signature-buttons">
+            <button type="button" id="saveSignature" class="green-button">Aplică Semnătura</button>
+            <button type="button" id="clearSignature" class="red-button">Resetează</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="livePreview">
+        <div class="header">
+          <div class="church-info">
+            <p>Biserica Baptista nr. 11</p>
+            <p>Cluj-Napoca</p>
+          </div>
+          <img src="assets/logo.png" alt="Logo" class="logo" />
+        </div>
+        <h2>DECONT de cheltuieli</h2>
+        <p><strong>Nume:</strong> <span id="previewName"></span></p>
+        <p><strong>Data:</strong> <span id="previewDate"></span></p>
+        <p>Cheltuielile au fost efectuate în vederea/pentru organizare evenimentului: <span id="previewPurpose" style="font-weight: bold;"></span></p>
+
+        <table id="dataTable">
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Explicații</th>
+              <th>Sumă</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rândurile vor fi adăugate dinamic aici -->
+          </tbody>
+        </table>
+
+        <p><strong>Modalitate decontare:</strong> <span id="previewPaymentMethod"></span></p>
+
+        <div style="display: block;"> 
+
+        <div class="approval-section">
+          <p><strong>Aprobat casierie</strong></p>
+          <img src="assets/Stampila.jpg" alt="Stampila" class="stamp" />
+        </div>
+
+        <div class="signature-section">
+          <p><strong>Nume și Semnătură</strong></p>
+          <p id="signatureName"></p>
+        </div>
+
+      </div>
+
+      <button onclick="window.print()">Print PDF</button>
+
+      <footer class="footer">
+        <a
+          href="#"
+          class="source-link"
+          target="_blank"
+          >source code</a
+        >
+        | built by
+        <a href="http://ovidiuchis.github.io/" target="_blank">@ovidiuchis</a>
+      </footer>
+    </div>
+  </body>
+</html>

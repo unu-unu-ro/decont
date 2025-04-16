@@ -1,0 +1,484 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 90%;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+h3 {
+  color: #333333bb;
+  text-align: center;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #f8f8f8;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input[type="file"] {
+  font-size: 14px;
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #555555;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  background-color: #e9ecef;
+  border-color: #007bff;
+}
+
+input[type="file"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button.preview {
+  background-color: #4caf50;
+}
+
+button.preview:hover {
+  background-color: #43a047;
+}
+
+button.preview:active {
+  background-color: #388e3c;
+}
+
+button {
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-tap-highlight-color: transparent;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button {
+  background-color: #007bff;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:active {
+  background-color: #004085;
+  transform: scale(0.98);
+}
+
+.error {
+  color: #f44336;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.preview {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+.preview h2 {
+  margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: left;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.footer a,
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer a:hover,
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer a.source-link {
+  color: #2b8a3e;
+  transition: color 0.2s ease;
+}
+
+footer a.source-link:hover,
+footer a.source-link:focus {
+  color: #1f6a2d;
+  text-decoration: underline;
+}
+
+footer a.source-link:visited {
+  color: #246835;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+img[alt="Uploaded Logo"],
+#logoPreview {
+  display: block;
+  max-width: 100px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+
+  label {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  button {
+    padding: 10px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  textarea {
+    min-height: 50px;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15px;
+  }
+
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    background: white;
+    box-shadow: none;
+  }
+
+  #preview,
+  .preview {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+    border-radius: 0 !important;
+  }
+
+  button,
+  footer,
+  form,
+  input,
+  textarea {
+    display: none !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #livePreview, #livePreview * {
+    visibility: visible;
+  }
+
+  #livePreview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  table,
+  th,
+  td {
+    border-collapse: collapse !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+#livePreview {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+#livePreview h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#livePreview .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#livePreview .header .logo {
+  width: 100px;
+  height: auto;
+}
+
+#livePreview .header .church-info {
+  font-size: 14px;
+  text-align: left;
+}
+
+#livePreview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#livePreview table th,
+#livePreview table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+#livePreview table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Stilizare pentru secțiunea Aprobat și ștampilă */
+.approval-section {
+  margin-top: 20px;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.approval-section .stamp {
+  width: 100px;
+  height: auto;
+}
+
+.signature-section {
+  text-align: right;
+}
+
+/* Stilizare pentru secțiunea Aprobat și Semnătură */
+.approval-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.approval-section .text-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.approval-section .image-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.approval-section .stamp {
+  width: 100px;
+  height: auto;
+}
+
+.signature-section {
+  text-align: right;
+}
+
+#signatureCanvas {
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  border: 1px solid #ccc;
+}
+
+/* Stilizare pentru butoanele de sub canvas */
+.green-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.green-button:hover {
+  background-color: #45a049;
+}
+
+.red-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.red-button:hover {
+  background-color: #e53935;
+}
+
+/* Stilizare pentru a afișa butoanele unul lângă altul */
+.signature-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
