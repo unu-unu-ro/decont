@@ -183,13 +183,8 @@ saveButton.addEventListener("click", () => {
   signatureImage.src = dataURL;
   signatureImage.alt = "Semnătură";
 
-  // Afișează semnătura și numele în secțiunea din dreapta jos
-  const signatureSection = document.querySelector(".signature-section");
-  signatureSection.innerHTML = "<p><strong>Nume și Semnătură</strong></p>"; // Resetează conținutul
-  signatureSection.appendChild(signatureImage);
-
+  // Afișează numele în <p id="signatureName">
   const nameValue = document.getElementById("name").value;
-  const signatureName = document.createElement("p");
+  const signatureName = document.getElementById("signatureName");
   signatureName.textContent = nameValue;
-  signatureSection.appendChild(signatureName);
 });

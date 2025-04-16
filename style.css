@@ -253,15 +253,41 @@ img[alt="Uploaded Logo"],
 @media print {
   @page {
     size: A4;
-    margin: 15px;
+    margin: 0;
   }
 
-  body,
-  html {
+  body {
     margin: 0;
     padding: 0;
-    background: white;
-    box-shadow: none;
+    overflow: hidden;
+  }
+
+  #livePreview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0;
+    border: none;
+  }
+
+  #livePreview table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #livePreview table th,
+  #livePreview table td {
+    word-wrap: break-word;
+  }
+
+  * {
+    page-break-after: avoid;
+    page-break-before: avoid;
+    page-break-inside: avoid;
   }
 
   #preview,
