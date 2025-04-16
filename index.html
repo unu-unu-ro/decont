@@ -41,10 +41,19 @@
           <option value="Transfer bancar">Transfer bancar</option>
         </select>
 
+        <label for="iban" id="ibanlabel">Cont IBAN:</label>
+        <input
+          type="text"
+          id="iban"
+          placeholder="Introdu IBAN"
+          oninput="updateLivePreview()"
+        />
+        <p id="ibanresult"></p>
+
         <div id="tableSection">
           <h2>Adaugă documente</h2>
           <label for="document">Document:</label>
-          <select id="document">
+          <select id="document" style="margin-bottom: 7px">
             <option value="Factura fisc.">Factura fiscala</option>
             <option value="Bon fisc. CUI">Bon fiscal CUI</option>
           </select>
@@ -75,7 +84,8 @@
           </div>
         </div>
       </form>
-      <button onclick="window.print()">Print PDF</button>
+      <button onclick="window.print()">Generează PDF</button>
+      <h2 style="text-align: center">Previzualizare decont PDF 👇</h2>
       <div id="livePreview">
         <div class="header">
           <div class="church-info">
@@ -112,6 +122,11 @@
           <span id="previewPaymentMethod"></span>
         </p>
 
+        <p id="ibanholder">
+          <strong>Cont IBAN:</strong>
+          <span id="previewIban"></span>
+        </p>
+
         <div class="legal-footer">
           <div class="legal-row">
             <div class="legal-column" id="stampColumn">
@@ -129,12 +144,6 @@
             </div>
           </div>
         </div>
-
-        <footer class="footer">
-          <a href="#" class="source-link" target="_blank">source code</a>
-          | built by
-          <a href="http://ovidiuchis.github.io/" target="_blank">@ovidiuchis</a>
-        </footer>
       </div>
     </div>
   </body>

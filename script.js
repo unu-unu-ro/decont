@@ -3,17 +3,29 @@ function updateLivePreview() {
   const nameValue = document.getElementById("name").value;
   const dateValue = document.getElementById("date").value;
   const purposeValue = document.getElementById("purpose").value;
+  const iban = document.getElementById("iban").value;
   const paymentMethodValue = document.getElementById("paymentMethod").value;
 
   // Salvează numele și modalitatea de încasare în localStorage
   localStorage.setItem("savedName", nameValue);
-  localStorage.setItem("savedPaymentMethod", paymentMethodValue);
 
   document.getElementById("previewName").textContent = nameValue;
   document.getElementById("previewDate").textContent = dateValue;
   document.getElementById("previewPurpose").textContent = purposeValue;
   document.getElementById("previewPaymentMethod").textContent =
     paymentMethodValue;
+
+  if (paymentMethodValue === "Transfer bancar") {
+    document.getElementById("previewIban").textContent = iban;
+    document.getElementById("ibanholder").style.display = "block";
+    document.getElementById("iban").style.display = "block";
+    document.getElementById("ibanlabel").style.display = "block";
+  } else {
+    document.getElementById("previewIban").textContent = "";
+    document.getElementById("ibanholder").style.display = "none";
+    document.getElementById("iban").style.display = "none";
+    document.getElementById("ibanlabel").style.display = "none";
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -102,7 +114,6 @@ addToTableButton.addEventListener("click", () => {
     dataTableBody.appendChild(newRow);
 
     // Resetează câmpurile după adăugare
-    document.getElementById("document").value = "";
     document.getElementById("explanation").value = "";
     document.getElementById("amount").value = "";
 
@@ -195,4 +206,30 @@ saveButton.addEventListener("click", () => {
   const nameValue = document.getElementById("name").value;
   const signatureName = document.getElementById("signatureName");
   signatureName.textContent = nameValue;
+});
+
+function isValidRomanianIBAN(iban) {
+  const cleaned = iban.toUpperCase().replace(/\s+/g, "");
+  const regex = /^RO\d{2}[A-Z]{4}[A-Z0-9]{16}$/;
+  return regex.test(cleaned);
+}
+
+const input = document.getElementById("iban");
+const result = document.getElementById("ibanresult");
+
+input.addEventListener("input", () => {
+  const value = input.value;
+  const valid = isValidRomanianIBAN(value);
+
+  if (valid) {
+    input.classList.add("valid");
+    input.classList.remove("invalid");
+    result.textContent = "✅ IBAN valid!";
+    result.style.color = "green";
+  } else {
+    input.classList.add("invalid");
+    input.classList.remove("valid");
+    result.textContent = "❌ IBAN invalid!";
+    result.style.color = "red";
+  }
 });
