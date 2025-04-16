@@ -1,6 +1,5 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
+  font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -92,30 +91,6 @@ button:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-input[type="file"] {
-  font-size: 14px;
-  padding: 8px;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  color: #555555;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-input[type="file"]:hover {
-  background-color: #e9ecef;
-  border-color: #007bff;
-}
-
-input[type="file"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
 button.preview {
   background-color: #4caf50;
 }
@@ -160,19 +135,6 @@ button:active {
   text-align: center;
   margin-top: 20px;
   font-size: 1rem;
-}
-
-.preview {
-  margin-top: 15px;
-  padding: 12px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-.preview h2 {
-  margin-top: 0;
 }
 
 table {
@@ -326,7 +288,8 @@ img[alt="Uploaded Logo"],
     visibility: hidden;
   }
 
-  #livePreview, #livePreview * {
+  #livePreview,
+  #livePreview * {
     visibility: visible;
   }
 
@@ -481,4 +444,33 @@ img[alt="Uploaded Logo"],
   display: flex;
   justify-content: flex-start;
   gap: 10px;
+}
+.legal-footer {
+  margin-top: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.legal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.legal-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+}
+
+.legal-column p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.stamp,
+.signature {
+  width: 100px; /* ajustează dimensiunea după nevoie */
+  height: auto;
 }

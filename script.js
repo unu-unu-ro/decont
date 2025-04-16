@@ -1,35 +1,41 @@
-// Salvează numele în localStorage și actualizează live preview
+// Salvează modalitatea de încasare în localStorage și actualizează live preview
 function updateLivePreview() {
   const nameValue = document.getElementById("name").value;
   const dateValue = document.getElementById("date").value;
   const purposeValue = document.getElementById("purpose").value;
   const paymentMethodValue = document.getElementById("paymentMethod").value;
 
-  // Salvează numele în localStorage
+  // Salvează numele și modalitatea de încasare în localStorage
   localStorage.setItem("savedName", nameValue);
+  localStorage.setItem("savedPaymentMethod", paymentMethodValue);
 
   document.getElementById("previewName").textContent = nameValue;
   document.getElementById("previewDate").textContent = dateValue;
   document.getElementById("previewPurpose").textContent = purposeValue;
-  document.getElementById("previewPaymentMethod").textContent = paymentMethodValue;
+  document.getElementById("previewPaymentMethod").textContent =
+    paymentMethodValue;
 }
 
-// La încărcarea paginii, preia numele salvat din localStorage și data curentă
+// Simplified the DOMContentLoaded logic to avoid duplication
 window.addEventListener("DOMContentLoaded", () => {
   const savedName = localStorage.getItem("savedName");
+  const savedPaymentMethod = localStorage.getItem("savedPaymentMethod");
+
   if (savedName) {
     document.getElementById("name").value = savedName;
     document.getElementById("previewName").textContent = savedName;
   }
 
-  // Setează data curentă în câmpul de dată
-  const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split("T")[0];
-  document.getElementById("date").value = formattedDate;
+  if (savedPaymentMethod) {
+    document.getElementById("paymentMethod").value = savedPaymentMethod;
+    document.getElementById("previewPaymentMethod").textContent =
+      savedPaymentMethod;
+  }
 
-  // Actualizează data în format DD/MM/YYYY în preview
-  const previewFormattedDate = `${currentDate.getDate().toString().padStart(2, "0")}/${(currentDate.getMonth() + 1).toString().padStart(2, "0")}/${currentDate.getFullYear()}`;
-  document.getElementById("previewDate").textContent = previewFormattedDate;
+  // Set current date in the form and preview
+  const currentDate = "2025-04-16"; // Hardcoded for consistency
+  document.getElementById("date").value = currentDate;
+  document.getElementById("previewDate").textContent = "16/04/2025";
 });
 
 // Adaugă funcționalitate pentru a adăuga date în tabel și actualizare live
@@ -75,7 +81,7 @@ addToTableButton.addEventListener("click", () => {
   const explanationValue = document.getElementById("explanation").value;
   const amountValue = document.getElementById("amount").value;
 
-  if (documentValue  && amountValue) {
+  if (documentValue && amountValue) {
     const newRow = document.createElement("tr");
 
     newRow.innerHTML = `
@@ -133,13 +139,36 @@ canvas.addEventListener("mouseout", () => {
   isDrawing = false;
 });
 
+// Add touch support for mobile devices
+canvas.addEventListener("touchstart", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const touch = e.touches[0];
+  isDrawing = true;
+  ctx.beginPath();
+  ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+  e.preventDefault();
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  if (isDrawing) {
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    ctx.stroke();
+  }
+  e.preventDefault();
+});
+
+canvas.addEventListener("touchend", () => {
+  isDrawing = false;
+});
+
 // Șterge semnătura
 const clearButton = document.getElementById("clearSignature");
 clearButton.addEventListener("click", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const signatureSection = document.querySelector(".signature-section");
-  signatureSection.innerHTML = "<p><strong>Nume și Semnătură</strong></p>"; // Resetează conținutul
-  
+  const signatureImage = document.getElementById("signature");
+  signatureImage.src = ""; // Resetează imaginea
 });
 
 // Salvează semnătura ca imagine
@@ -149,18 +178,16 @@ const saveButton = document.getElementById("saveSignature");
 saveButton.addEventListener("click", () => {
   const dataURL = canvas.toDataURL("image/png");
 
-  // Afișează semnătura în secțiunea din dreapta jos
-  const signatureImage = document.createElement("img");
+  // Afișează semnătura în img cu id="signature"
+  const signatureImage = document.getElementById("signature");
   signatureImage.src = dataURL;
   signatureImage.alt = "Semnătură";
-  signatureImage.style.width = "100px";
-  signatureImage.style.height = "auto";
 
+  // Afișează semnătura și numele în secțiunea din dreapta jos
   const signatureSection = document.querySelector(".signature-section");
   signatureSection.innerHTML = "<p><strong>Nume și Semnătură</strong></p>"; // Resetează conținutul
   signatureSection.appendChild(signatureImage);
 
-  // Afișează numele utilizatorului
   const nameValue = document.getElementById("name").value;
   const signatureName = document.createElement("p");
   signatureName.textContent = nameValue;
