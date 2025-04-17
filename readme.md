@@ -37,8 +37,9 @@ O micro-aplicație web pentru generarea rapidă de **deconturi PDF** pentru achi
 ## 🧑‍💻 Vrei să folosești aplicația pentru tine sau echipa ta?
 
 Fă un **fork** sau **clonează** acest repository și modifică:  
-🔧 logo-ul  
+🖼️ logo-ul  
 📄 datele din antet  
+🖃 ștampila  
 
 Poți adapta rapid aplicația pentru orice nevoie.
 
