@@ -384,6 +384,7 @@ img[alt="Uploaded Logo"],
   cursor: pointer;
   font-size: 1rem;
   margin-right: 10px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .green-button:hover {
@@ -398,6 +399,7 @@ img[alt="Uploaded Logo"],
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .red-button:hover {
@@ -509,4 +511,32 @@ select:focus {
 
 #tableSection button:hover {
   background-color: #0056b3;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: #f8f8f8;
+  color: #333;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.5);
+}
+
+button,
+.green-button,
+.red-button {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
