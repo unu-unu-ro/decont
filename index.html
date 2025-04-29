@@ -17,38 +17,57 @@
       <h1>Decont Unu-Unu</h1>
 
       <form id="pdfForm">
-        <label for="name">Nume:</label>
-        <input type="text" id="name" placeholder="Introdu numele" oninput="updateLivePreview()" />
+        <div class="form-field">
+          <label for="name">Nume:</label>
+          <input type="text" id="name" placeholder="Introdu numele" oninput="updateLivePreview()" />
+        </div>
 
-        <label for="date">Data:</label>
-        <input type="date" id="date" oninput="updateLivePreview()" />
+        <div class="form-field">
+          <label for="date">Data:</label>
+          <input type="date" id="date" oninput="updateLivePreview()" />
+        </div>
 
-        <label for="purpose">Scop cheltuieli:</label>
-        <input type="text" id="purpose" placeholder="Introdu scopul cheltuielilor" oninput="updateLivePreview()" />
+        <div class="form-field">
+          <label for="purpose">Scop cheltuieli:</label>
+          <input type="text" id="purpose" placeholder="Introdu scopul cheltuielilor" oninput="updateLivePreview()" />
+        </div>
 
-        <label for="paymentMethod">Modalitate decontare:</label>
-        <select id="paymentMethod" oninput="updateLivePreview()">
-          <option value="Transfer bancar" selected>Transfer bancar</option>
-          <option value="Numerar">Numerar</option>
-        </select>
+        <div class="form-field">
+          <label for="paymentMethod">Modalitate decontare:</label>
+          <select id="paymentMethod" oninput="updateLivePreview()">
+            <option value="Transfer bancar" selected>Transfer bancar</option>
+            <option value="Numerar">Numerar</option>
+          </select>
+        </div>
 
-        <label for="iban" id="ibanlabel">Cont IBAN:</label>
-        <input type="text" id="iban" placeholder="Introdu IBAN" oninput="updateLivePreview()" />
-        <p id="ibanresult"></p>
+        <div class="form-field">
+          <label for="iban" id="ibanlabel">Cont IBAN:</label>
+          <input type="text" id="iban" placeholder="Introdu IBAN" oninput="updateLivePreview()" />
+        </div>
+        <div class="form-field">
+          <label for="ibanresult"></label>
+          <p id="ibanresult"></p>
+        </div>
 
         <div id="tableSection">
           <h2>Adaugă documente</h2>
-          <label for="document">Document:</label>
-          <select id="document" style="margin-bottom: 7px">
-            <option value="Factura fisc.">Factura fiscala</option>
-            <option value="Bon fisc. CUI">Bon fiscal CUI</option>
-          </select>
+          <div class="form-field">
+            <label for="document">Document:</label>
+            <select id="document">
+              <option value="Factura fisc.">Factura fiscala</option>
+              <option value="Bon fisc. CUI">Bon fiscal CUI</option>
+            </select>
+          </div>
 
-          <label for="explanation">Explicații:</label>
-          <input type="text" id="explanation" placeholder="Detalii explicații" />
+          <div class="form-field">
+            <label for="explanation">Explicații:</label>
+            <input type="text" id="explanation" placeholder="Detalii explicații" />
+          </div>
 
-          <label for="amount">Sumă:</label>
-          <input type="number" id="amount" placeholder="Introdu suma" />
+          <div class="form-field">
+            <label for="amount">Sumă:</label>
+            <input type="number" id="amount" placeholder="Introdu suma" />
+          </div>
 
           <button type="button" id="addToTable">Adaugă</button>
         </div>
