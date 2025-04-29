@@ -69,20 +69,25 @@
             <input type="number" id="amount" placeholder="Introdu suma" />
           </div>
 
-          <button type="button" id="addToTable">Adaugă</button>
+          <div class="tbar">
+            <div class="tfill"></div>
+            <button type="button" class="blue-button" id="addToTable">Adaugă</button>
+          </div>
         </div>
 
         <div id="signatureSection">
           <h3>Semnătură</h3>
           <canvas id="signatureCanvas" style="border: 1px solid #ccc"></canvas>
-          <div class="signature-buttons">
+          <div class="tbar">
+            <div class="tfill"></div>
             <button type="button" id="saveSignature" class="green-button">Aplică semnătura</button>
             <button type="button" id="clearSignature" class="red-button">Resetează</button>
           </div>
         </div>
       </form>
-      <button onclick="window.print()">Generează PDF</button>
+
       <h2 style="text-align: center">Previzualizare decont PDF 👇</h2>
+
       <div id="livePreview">
         <div class="header">
           <div class="church-info">
@@ -144,6 +149,38 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="tbar" id="submit-toolbar">
+        <div class="tfill"></div>
+        <button onclick="window.print()">
+          <svg
+            width="24px"
+            height="24px"
+            fill="#ffffff"
+            viewBox="0 0 24 24"
+            id="export"
+            data-name="Flat Color"
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon flat-color"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                id="secondary"
+                d="M21,2H17a1,1,0,0,0,0,2h1.59l-8.3,8.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V7a1,1,0,0,0,2,0V3A1,1,0,0,0,21,2Z"
+                style="fill: #f8f661"
+              ></path>
+              <path
+                id="primary"
+                d="M18,22H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4h6.11a1,1,0,0,1,0,2H4V20H18V13.89a1,1,0,0,1,2,0V20A2,2,0,0,1,18,22Z"
+                style="fill: #ffffff"
+              ></path>
+            </g>
+          </svg>
+          Generează PDF
+        </button>
       </div>
     </div>
   </body>
