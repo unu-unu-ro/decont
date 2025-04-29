@@ -229,6 +229,7 @@ const scale = window.devicePixelRatio || 1;
 elements.canvas.width = elements.canvas.offsetWidth * scale;
 elements.canvas.height = elements.canvas.offsetHeight * scale;
 ctx.scale(scale, scale);
+ctx.lineWidth = 3;
 
 // Adjust cursor position for drawing on the canvas
 elements.canvas.addEventListener("mousedown", e => {
