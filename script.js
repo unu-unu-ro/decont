@@ -23,9 +23,10 @@ const elements = {
 
   // Alte elemente
   dataTableBody: document.querySelector("#dataTable tbody"),
+  dataTableFoot: document.querySelector("#dataTable tfoot"),
   signature: document.getElementById("signature"),
   signatureName: document.getElementById("signatureName"),
-  canvas: document.getElementById("signatureCanvas"),
+  canvas: document.getElementById("signatureCanvas")
 };
 
 // Funcție pentru formatarea datei în format DD/MM/YYYY folosind moment.js
@@ -148,36 +149,32 @@ elements.date.addEventListener("input", function () {
 const addToTableButton = document.getElementById("addToTable");
 
 // Adaugă funcționalitate pentru calcularea totalului
-// Modifică funcția calculateTotal pentru a menține totalul ca ultima linie
 function calculateTotal() {
   const rows = Array.from(elements.dataTableBody.querySelectorAll("tr"));
   let total = 0;
 
-  // Exclude rândul de total din calcul
-  rows.forEach((row) => {
-    if (row.id !== "totalRow") {
-      const amountCell = row.querySelector("td:last-child");
-      if (amountCell) {
-        total += parseFloat(amountCell.textContent) || 0;
-      }
+  // Calculate total from all rows in tbody
+  rows.forEach(row => {
+    const amountCell = row.querySelector("td:nth-child(3)");
+    if (amountCell) {
+      total += parseFloat(amountCell.textContent) || 0;
     }
   });
 
-  // Mută rândul de total la final, dacă există
-  let totalRow = document.getElementById("totalRow");
-  if (!totalRow) {
-    totalRow = document.createElement("tr");
-    totalRow.id = "totalRow";
-    totalRow.innerHTML = `
-      <td colspan="2" style="font-weight: bold;">TOTAL</td>
-      <td style="font-weight: bold;" id="totalAmount">0</td>
-    `;
-    elements.dataTableBody.appendChild(totalRow);
-  } else {
-    elements.dataTableBody.appendChild(totalRow); // Asigură-te că este ultima linie
-  }
+  // Clear existing tfoot content
+  elements.dataTableFoot.innerHTML = "";
 
-  document.getElementById("totalAmount").textContent = total.toFixed(2);
+  // Create total row in tfoot
+  const totalRow = document.createElement("tr");
+  totalRow.id = "totalRow";
+  totalRow.innerHTML = `
+    <td colspan="2" style="font-weight: bold;">TOTAL</td>
+    <td style="font-weight: bold;" id="totalAmount">${total.toFixed(2)}</td>
+    <td class="action-column"></td>
+  `;
+
+  // Add total row to tfoot
+  elements.dataTableFoot.appendChild(totalRow);
 }
 
 // Modifică evenimentul de adăugare în tabel pentru a recalcula totalul
@@ -193,7 +190,18 @@ addToTableButton.addEventListener("click", () => {
       <td>${documentValue}</td>
       <td>${explanationValue}</td>
       <td>${parseFloat(amountValue).toFixed(2)}</td>
+      <td class="action-column">
+        <button class="remove-btn" title="Șterge rând">❌</button>
+      </td>
     `;
+
+    // Adaugă event listener pentru butonul de ștergere
+    const removeBtn = newRow.querySelector(".remove-btn");
+    removeBtn.addEventListener("click", function () {
+      newRow.remove();
+      // Recalculează totalul după ștergere
+      calculateTotal();
+    });
 
     elements.dataTableBody.appendChild(newRow);
 
@@ -218,14 +226,14 @@ elements.canvas.height = elements.canvas.offsetHeight * scale;
 ctx.scale(scale, scale);
 
 // Adjust cursor position for drawing on the canvas
-elements.canvas.addEventListener("mousedown", (e) => {
+elements.canvas.addEventListener("mousedown", e => {
   const rect = elements.canvas.getBoundingClientRect();
   isDrawing = true;
   ctx.beginPath();
   ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
 });
 
-elements.canvas.addEventListener("mousemove", (e) => {
+elements.canvas.addEventListener("mousemove", e => {
   if (isDrawing) {
     const rect = elements.canvas.getBoundingClientRect();
     ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
@@ -242,7 +250,7 @@ elements.canvas.addEventListener("mouseout", () => {
 });
 
 // Add touch support for mobile devices
-elements.canvas.addEventListener("touchstart", (e) => {
+elements.canvas.addEventListener("touchstart", e => {
   const rect = elements.canvas.getBoundingClientRect();
   const touch = e.touches[0];
   isDrawing = true;
@@ -251,7 +259,7 @@ elements.canvas.addEventListener("touchstart", (e) => {
   e.preventDefault();
 });
 
-elements.canvas.addEventListener("touchmove", (e) => {
+elements.canvas.addEventListener("touchmove", e => {
   if (isDrawing) {
     const rect = elements.canvas.getBoundingClientRect();
     const touch = e.touches[0];

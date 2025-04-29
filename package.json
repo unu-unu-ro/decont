@@ -1,0 +1,16 @@
+{
+  "name": "decont",
+  "version": "1.0.0",
+  "description": "O micro-aplicație web pentru generarea rapidă de **deconturi PDF** pentru achiziții. Ideală pentru utilizare individuală sau în organizații mici.",
+  "main": "script.js",
+  "scripts": {
+    "clear": "rimraf node_modules",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --files '**/*'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^3.0.2"
+  }
+}

@@ -51,7 +51,7 @@ label {
   margin-bottom: 6px;
   color: #000000;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 input[type="text"],
@@ -272,6 +272,12 @@ img[alt="Uploaded Logo"],
     border-collapse: collapse !important;
     border: 1px solid #ccc !important;
   }
+
+  /* Ascunde coloana de acțiuni la printare */
+  .action-column,
+  td:last-child {
+    display: none !important;
+  }
 }
 
 #livePreview {
@@ -476,26 +482,6 @@ select:focus {
   margin-top: 20px;
 }
 
-#tableSection label {
-  display: block;
-  margin-bottom: 6px;
-  color: #000000;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-#tableSection input[type="text"],
-#tableSection input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  box-sizing: border-box;
-  background-color: #f8f8f8;
-  margin-bottom: 10px;
-}
-
 #tableSection button {
   background-color: #007bff;
   color: white;
@@ -539,4 +525,34 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Stilizare pentru a face coloana de acțiuni să aibă dimensiune fixă */
+.action-column {
+  width: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  padding: 0;
+  text-align: center;
+}
+
+/* Stilizare buton de ștergere */
+.remove-btn {
+  cursor: pointer;
+  color: #f44336;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+}
+
+.remove-btn:hover {
+  color: #d32f2f;
+  transform: scale(1.2);
 }
