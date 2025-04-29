@@ -1,32 +1,36 @@
+function $(selector, parent) {
+  return (parent || document).querySelector(selector);
+}
+
 // Cache-uim referințele DOM pentru elementele utilizate frecvent
 const elements = {
   // Câmpuri de intrare
-  name: document.getElementById("name"),
-  date: document.getElementById("date"),
-  purpose: document.getElementById("purpose"),
-  paymentMethod: document.getElementById("paymentMethod"),
-  iban: document.getElementById("iban"),
-  explanation: document.getElementById("explanation"),
-  amount: document.getElementById("amount"),
+  name: $("#name"),
+  date: $("#date"),
+  purpose: $("#purpose"),
+  paymentMethod: $("#paymentMethod"),
+  iban: $("#iban"),
+  explanation: $("#explanation"),
+  amount: $("#amount"),
 
   // Elemente pentru preview
-  previewName: document.getElementById("previewName"),
-  previewDate: document.getElementById("previewDate"),
-  previewPurpose: document.getElementById("previewPurpose"),
-  previewPaymentMethod: document.getElementById("previewPaymentMethod"),
-  previewIban: document.getElementById("previewIban"),
+  previewName: $("#previewName"),
+  previewDate: $("#previewDate"),
+  previewPurpose: $("#previewPurpose"),
+  previewPaymentMethod: $("#previewPaymentMethod"),
+  previewIban: $("#previewIban"),
 
   // Elemente IBAN
-  ibanresult: document.getElementById("ibanresult"),
-  ibanholder: document.getElementById("ibanholder"),
-  ibanlabel: document.getElementById("ibanlabel"),
+  ibanresult: $("#ibanresult"),
+  ibanholder: $("#ibanholder"),
+  ibanlabel: $("#ibanlabel"),
 
   // Alte elemente
-  dataTableBody: document.querySelector("#dataTable tbody"),
-  dataTableFoot: document.querySelector("#dataTable tfoot"),
-  signature: document.getElementById("signature"),
-  signatureName: document.getElementById("signatureName"),
-  canvas: document.getElementById("signatureCanvas")
+  dataTableBody: $("#dataTable tbody"),
+  dataTableFoot: $("#dataTable tfoot"),
+  signature: $("#signature"),
+  signatureName: $("#signatureName"),
+  canvas: $("#signatureCanvas")
 };
 
 // Funcție pentru formatarea datei în format DD/MM/YYYY folosind moment.js
@@ -146,7 +150,7 @@ elements.date.addEventListener("input", function () {
 });
 
 // Adaugă funcționalitate pentru a adăuga date în tabel și actualizare live
-const addToTableButton = document.getElementById("addToTable");
+const addToTableButton = $("#addToTable");
 
 // Adaugă funcționalitate pentru calcularea totalului
 function calculateTotal() {
@@ -179,7 +183,7 @@ function calculateTotal() {
 
 // Modifică evenimentul de adăugare în tabel pentru a recalcula totalul
 addToTableButton.addEventListener("click", () => {
-  const documentValue = document.getElementById("document").value;
+  const documentValue = $("#document").value;
   const explanationValue = elements.explanation.value;
   const amountValue = elements.amount.value;
 
@@ -199,7 +203,6 @@ addToTableButton.addEventListener("click", () => {
     const removeBtn = newRow.querySelector(".remove-btn");
     removeBtn.addEventListener("click", function () {
       newRow.remove();
-      // Recalculează totalul după ștergere
       calculateTotal();
     });
 
@@ -274,14 +277,14 @@ elements.canvas.addEventListener("touchend", () => {
 });
 
 // Șterge semnătura
-const clearButton = document.getElementById("clearSignature");
+const clearButton = $("#clearSignature");
 clearButton.addEventListener("click", () => {
   ctx.clearRect(0, 0, elements.canvas.width, elements.canvas.height);
   elements.signature.src = ""; // Resetează imaginea
 });
 
 // Salvează semnătura ca imagine
-const saveButton = document.getElementById("saveSignature");
+const saveButton = $("#saveSignature");
 
 // Salvează semnătura și numele în secțiunea din dreapta jos
 saveButton.addEventListener("click", () => {
