@@ -33,9 +33,12 @@ const elements = {
   canvas: $("#signatureCanvas")
 };
 
-// Funcție pentru formatarea datei în format DD/MM/YYYY folosind moment.js
-function formatDateDDMMYYYY(date) {
-  return moment(date).format("DD/MM/YYYY");
+function formatDate(date) {
+  console.info("format", date);
+  if (typeof date === "string") {
+    date = new Date(date);
+  }
+  return date.toLocaleDateString("ro-RO");
 }
 
 // Funcție pentru a manipula vizibilitatea elementelor IBAN
@@ -137,15 +140,14 @@ window.addEventListener("DOMContentLoaded", () => {
   elements.date.value = currentDate.toISOString().split("T")[0];
 
   // Format data în DD/MM/YYYY pentru live preview
-  const previewFormattedDate = formatDateDDMMYYYY(currentDate);
+  const previewFormattedDate = formatDate(currentDate);
   elements.previewDate.textContent = previewFormattedDate;
 });
 
 // Asigură-te că data din input este transformată corect pentru live preview
 elements.date.addEventListener("input", function () {
-  // Folosește moment.js pentru a formata data
   if (this.value) {
-    elements.previewDate.textContent = moment(this.value).format("DD/MM/YYYY");
+    elements.previewDate.textContent = formatDate(this.value);
   }
 });
 
