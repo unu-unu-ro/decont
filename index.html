@@ -18,38 +18,22 @@
       <form id="pdfForm">
         <div class="form-field">
           <label for="name">Nume:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Introdu numele"
-            required
-            minlength="5"
-            maxlength="80"
-            oninput="updateLivePreview()"
-          />
+          <input type="text" id="name" name="name" placeholder="Introdu numele" required minlength="5" maxlength="80" />
         </div>
 
         <div class="form-field">
           <label for="date">Data:</label>
-          <input type="date" id="date" required oninput="updateLivePreview()" />
+          <input type="date" id="date" required />
         </div>
 
         <div class="form-field">
           <label for="purpose">Scop cheltuieli:</label>
-          <input
-            type="text"
-            id="purpose"
-            name="purpose"
-            required
-            placeholder="Introdu scopul cheltuielilor"
-            oninput="updateLivePreview()"
-          />
+          <input type="text" id="purpose" name="purpose" required placeholder="Introdu scopul cheltuielilor" />
         </div>
 
         <div class="form-field">
           <label for="paymentMethod">Modalitate decontare:</label>
-          <select id="paymentMethod" oninput="updateLivePreview()">
+          <select id="paymentMethod">
             <option value="Transfer bancar" selected>Transfer bancar</option>
             <option value="Numerar">Numerar</option>
           </select>
@@ -57,7 +41,7 @@
 
         <div class="form-field">
           <label for="iban" id="ibanlabel">Cont IBAN:</label>
-          <input type="text" id="iban" class="console-font" placeholder="Introdu IBAN" oninput="updateLivePreview()" />
+          <input type="text" id="iban" class="console-font" placeholder="Introdu IBAN" />
         </div>
 
         <div id="tableSection">

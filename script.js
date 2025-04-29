@@ -89,7 +89,7 @@ function updateLivePreview() {
   localStorage.setItem("savedIban", iban);
 
   elements.previewName.textContent = nameValue;
-  elements.previewDate.textContent = dateValue;
+  elements.previewDate.textContent = formatDate(dateValue);
   elements.previewPurpose.textContent = purposeValue;
   elements.previewPaymentMethod.textContent = paymentMethodValue;
 
@@ -132,20 +132,14 @@ window.addEventListener("DOMContentLoaded", () => {
     toggleIbanVisibility(false);
   }
 
-  // data
+  // data - use local date to avoid timezone issues
   const currentDate = new Date();
-  elements.date.value = currentDate.toISOString().split("T")[0];
-
-  // Format data în DD/MM/YYYY pentru live preview
-  const previewFormattedDate = formatDate(currentDate);
-  elements.previewDate.textContent = previewFormattedDate;
-});
-
-// Asigură-te că data din input este transformată corect pentru live preview
-elements.date.addEventListener("input", function () {
-  if (this.value) {
-    elements.previewDate.textContent = formatDate(this.value);
-  }
+  // Format date as YYYY-MM-DD using local date parts
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+  const day = String(currentDate.getDate()).padStart(2, "0");
+  elements.date.value = `${year}-${month}-${day}`;
+  elements.previewDate.textContent = formatDate(currentDate);
 });
 
 // Adaugă funcționalitate pentru a adăuga date în tabel și actualizare live
@@ -303,10 +297,12 @@ saveButton.addEventListener("click", () => {
   signatureStatus = true;
 });
 
-elements.iban.addEventListener("input", () => {
-  const input = elements.iban;
-  const value = input.value;
-  updateIbanValidation(value);
+["name", "date", "purpose", "paymentMethod", "iban"].forEach(field => {
+  $(`#${field}`).addEventListener("input", updateLivePreview);
+});
+
+elements.iban.addEventListener("input", e => {
+  updateIbanValidation(e.target.value);
 });
 
 $("#pdfForm").addEventListener("submit", function (event) {
