@@ -18,17 +18,33 @@
       <form id="pdfForm">
         <div class="form-field">
           <label for="name">Nume:</label>
-          <input type="text" id="name" placeholder="Introdu numele" oninput="updateLivePreview()" />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Introdu numele"
+            required
+            minlength="5"
+            maxlength="80"
+            oninput="updateLivePreview()"
+          />
         </div>
 
         <div class="form-field">
           <label for="date">Data:</label>
-          <input type="date" id="date" oninput="updateLivePreview()" />
+          <input type="date" id="date" required oninput="updateLivePreview()" />
         </div>
 
         <div class="form-field">
           <label for="purpose">Scop cheltuieli:</label>
-          <input type="text" id="purpose" placeholder="Introdu scopul cheltuielilor" oninput="updateLivePreview()" />
+          <input
+            type="text"
+            id="purpose"
+            name="purpose"
+            required
+            placeholder="Introdu scopul cheltuielilor"
+            oninput="updateLivePreview()"
+          />
         </div>
 
         <div class="form-field">
@@ -42,10 +58,6 @@
         <div class="form-field">
           <label for="iban" id="ibanlabel">Cont IBAN:</label>
           <input type="text" id="iban" class="console-font" placeholder="Introdu IBAN" oninput="updateLivePreview()" />
-        </div>
-        <div class="form-field">
-          <label for="ibanresult"></label>
-          <p id="ibanresult"></p>
         </div>
 
         <div id="tableSection">
@@ -83,104 +95,104 @@
             <button type="button" id="clearSignature" class="red-button">Resetează</button>
           </div>
         </div>
+
+        <h2 style="text-align: center">Previzualizare decont PDF 👇</h2>
+
+        <div id="livePreview">
+          <div class="header">
+            <div class="church-info">
+              <p>Biserica Creștină Baptistă nr. 11</p>
+              <p>str. Iugoslaviei nr. 64, Cluj-Napoca</p>
+              <p>CUI: 26392200</p>
+            </div>
+            <img src="assets/logoblack.png" alt="Logo" class="logo" />
+          </div>
+          <h2>DECONT de cheltuieli</h2>
+          <p><strong>Nume:</strong> <span id="previewName"></span></p>
+          <p><strong>Data:</strong> <span id="previewDate"></span></p>
+          <p>
+            Cheltuielile au fost efectuate în vederea/pentru organizare evenimentului:
+            <span id="previewPurpose" style="font-weight: bold"></span>
+          </p>
+
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Explicații</th>
+                <th>Sumă</th>
+                <th class="action-column"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rândurile vor fi adăugate dinamic aici -->
+            </tbody>
+            <tfoot>
+              <!-- Rândul de total va fi adăugat aici -->
+            </tfoot>
+          </table>
+
+          <p>
+            <strong>Modalitate decontare:</strong>
+            <span id="previewPaymentMethod"></span>
+          </p>
+
+          <p id="ibanholder">
+            <strong>Cont IBAN:</strong>
+            <span id="previewIban" class="console-font"></span>
+          </p>
+
+          <div class="legal-footer">
+            <div class="legal-row">
+              <div class="legal-column" id="stampColumn">
+                <p><strong>Aprobat casierie</strong></p>
+                <img src="assets/Stampila.jpg" alt="Stampila" class="stamp" />
+              </div>
+              <div class="legal-column" id="signatureColumn">
+                <p id="signatureName">Nume</p>
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+                  alt="Semnătură"
+                  id="signature"
+                  class="signature"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tbar" id="submit-toolbar">
+          <div class="tfill"></div>
+          <button type="submit">
+            <svg
+              width="24px"
+              height="24px"
+              fill="#ffffff"
+              viewBox="0 0 24 24"
+              id="export"
+              data-name="Flat Color"
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon flat-color"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  id="secondary"
+                  d="M21,2H17a1,1,0,0,0,0,2h1.59l-8.3,8.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V7a1,1,0,0,0,2,0V3A1,1,0,0,0,21,2Z"
+                  style="fill: #f8f661"
+                ></path>
+                <path
+                  id="primary"
+                  d="M18,22H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4h6.11a1,1,0,0,1,0,2H4V20H18V13.89a1,1,0,0,1,2,0V20A2,2,0,0,1,18,22Z"
+                  style="fill: #ffffff"
+                ></path>
+              </g>
+            </svg>
+            Generează PDF
+          </button>
+        </div>
       </form>
-
-      <h2 style="text-align: center">Previzualizare decont PDF 👇</h2>
-
-      <div id="livePreview">
-        <div class="header">
-          <div class="church-info">
-            <p>Biserica Creștină Baptistă nr. 11</p>
-            <p>str. Iugoslaviei nr. 64, Cluj-Napoca</p>
-            <p>CUI: 26392200</p>
-          </div>
-          <img src="assets/logoblack.png" alt="Logo" class="logo" />
-        </div>
-        <h2>DECONT de cheltuieli</h2>
-        <p><strong>Nume:</strong> <span id="previewName"></span></p>
-        <p><strong>Data:</strong> <span id="previewDate"></span></p>
-        <p>
-          Cheltuielile au fost efectuate în vederea/pentru organizare evenimentului:
-          <span id="previewPurpose" style="font-weight: bold"></span>
-        </p>
-
-        <table id="dataTable">
-          <thead>
-            <tr>
-              <th>Document</th>
-              <th>Explicații</th>
-              <th>Sumă</th>
-              <th class="action-column"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Rândurile vor fi adăugate dinamic aici -->
-          </tbody>
-          <tfoot>
-            <!-- Rândul de total va fi adăugat aici -->
-          </tfoot>
-        </table>
-
-        <p>
-          <strong>Modalitate decontare:</strong>
-          <span id="previewPaymentMethod"></span>
-        </p>
-
-        <p id="ibanholder">
-          <strong>Cont IBAN:</strong>
-          <span id="previewIban" class="console-font"></span>
-        </p>
-
-        <div class="legal-footer">
-          <div class="legal-row">
-            <div class="legal-column" id="stampColumn">
-              <p><strong>Aprobat casierie</strong></p>
-              <img src="assets/Stampila.jpg" alt="Stampila" class="stamp" />
-            </div>
-            <div class="legal-column" id="signatureColumn">
-              <p id="signatureName">Nume</p>
-              <img
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-                alt="Semnătură"
-                id="signature"
-                class="signature"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tbar" id="submit-toolbar">
-        <div class="tfill"></div>
-        <button onclick="window.print()">
-          <svg
-            width="24px"
-            height="24px"
-            fill="#ffffff"
-            viewBox="0 0 24 24"
-            id="export"
-            data-name="Flat Color"
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon flat-color"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                id="secondary"
-                d="M21,2H17a1,1,0,0,0,0,2h1.59l-8.3,8.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V7a1,1,0,0,0,2,0V3A1,1,0,0,0,21,2Z"
-                style="fill: #f8f661"
-              ></path>
-              <path
-                id="primary"
-                d="M18,22H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4h6.11a1,1,0,0,1,0,2H4V20H18V13.89a1,1,0,0,1,2,0V20A2,2,0,0,1,18,22Z"
-                style="fill: #ffffff"
-              ></path>
-            </g>
-          </svg>
-          Generează PDF
-        </button>
-      </div>
     </div>
   </body>
 </html>

@@ -301,7 +301,6 @@ img[alt="Uploaded Logo"],
     page-break-inside: avoid;
   }
 
-  #preview,
   .preview {
     width: 100% !important;
     max-width: 100% !important;
@@ -314,7 +313,6 @@ img[alt="Uploaded Logo"],
   }
 
   button,
-  form,
   input,
   textarea {
     display: none !important;
@@ -326,7 +324,7 @@ img[alt="Uploaded Logo"],
 
   #livePreview,
   #livePreview * {
-    visibility: visible;
+    visibility: visible !important;
   }
 
   #livePreview {
@@ -343,7 +341,6 @@ img[alt="Uploaded Logo"],
     border: 1px solid #ccc !important;
   }
 
-  /* Ascunde coloana de acțiuni la printare */
   .action-column,
   td:last-child {
     display: none !important;
@@ -577,4 +574,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "Courier New", Consolas, Monaco, monospace;
   letter-spacing: 1px;
   font-weight: bold;
+}
+
+input.valid {
+  border: 1px solid #4caf50 !important;
+  background-color: #f0fff0 !important;
+}
+/* Apply same invalid styling for all invalid form elements */
+input:invalid,
+select:invalid,
+textarea:invalid {
+  border: 1px solid #f44336 !important;
+  background-color: #fff0f0 !important;
 }

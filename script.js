@@ -2,6 +2,9 @@ function $(selector, parent) {
   return (parent || document).querySelector(selector);
 }
 
+// Add signatureStatus boolean variable
+let signatureStatus = false;
+
 // Cache-uim referințele DOM pentru elementele utilizate frecvent
 const elements = {
   // Câmpuri de intrare
@@ -21,7 +24,6 @@ const elements = {
   previewIban: $("#previewIban"),
 
   // Elemente IBAN
-  ibanresult: $("#ibanresult"),
   ibanholder: $("#ibanholder"),
   ibanlabel: $("#ibanlabel"),
 
@@ -34,7 +36,6 @@ const elements = {
 };
 
 function formatDate(date) {
-  console.info("format", date);
   if (typeof date === "string") {
     date = new Date(date);
   }
@@ -47,7 +48,6 @@ function toggleIbanVisibility(visible) {
   elements.ibanholder.style.display = display;
   elements.iban.style.display = display;
   elements.ibanlabel.style.display = display;
-  elements.ibanresult.style.display = display;
 
   if (!visible) {
     elements.previewIban.textContent = "";
@@ -67,14 +67,11 @@ function updateIbanValidation(value) {
 
   if (valid) {
     elements.iban.classList.add("valid");
-    elements.iban.classList.remove("invalid");
-    elements.ibanresult.textContent = "✅ IBAN valid!";
-    elements.ibanresult.style.color = "green";
+    elements.iban.setCustomValidity(""); // Clear any validation message
   } else {
-    elements.iban.classList.add("invalid");
     elements.iban.classList.remove("valid");
-    elements.ibanresult.textContent = "❌ IBAN invalid!";
-    elements.ibanresult.style.color = "red";
+    elements.iban.setCustomValidity("IBAN invalid! Formatul corect este: RO46BTRL06701205T61531XX");
+    elements.iban.reportValidity(); // Show validation message
   }
 }
 
@@ -83,7 +80,7 @@ function updateLivePreview() {
   const nameValue = elements.name.value;
   const dateValue = elements.date.value;
   const purposeValue = elements.purpose.value;
-  const iban = elements.iban.value;
+  const iban = elements.iban.value.trim().toUpperCase();
   const paymentMethodValue = elements.paymentMethod.value;
 
   // Salvează datele în localStorage
@@ -284,6 +281,7 @@ const clearButton = $("#clearSignature");
 clearButton.addEventListener("click", () => {
   ctx.clearRect(0, 0, elements.canvas.width, elements.canvas.height);
   elements.signature.src = ""; // Resetează imaginea
+  signatureStatus = false; // Reset signature status
 });
 
 // Salvează semnătura ca imagine
@@ -300,12 +298,33 @@ saveButton.addEventListener("click", () => {
   // Afișează numele în <p id="signatureName">
   const nameValue = elements.name.value;
   elements.signatureName.textContent = nameValue;
+
+  // Set signature status to "yes" so form can be submitted
+  signatureStatus = true;
 });
 
-const input = elements.iban;
-const result = elements.ibanresult;
-
-input.addEventListener("input", () => {
+elements.iban.addEventListener("input", () => {
+  const input = elements.iban;
   const value = input.value;
   updateIbanValidation(value);
+});
+
+$("#pdfForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const tableRows = elements.dataTableBody.querySelectorAll("tr");
+  if (tableRows.length === 0) {
+    alert("Adăugați cel puțin un document!");
+    $("#tableSection").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!signatureStatus) {
+    alert("Vă rugăm să aplicați semnătura!");
+    // Scroll to signature section for better UX
+    $("#signatureSection").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  window.print();
 });
