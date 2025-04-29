@@ -395,8 +395,11 @@ img[alt="Uploaded Logo"],
   text-align: left;
 }
 
-#livePreview table th {
+table th {
   background-color: #f4f4f4;
+  font-weight: bold;
+}
+table tfoot td {
   font-weight: bold;
 }
 

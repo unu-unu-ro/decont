@@ -174,8 +174,8 @@ function calculateTotal() {
   const totalRow = document.createElement("tr");
   totalRow.id = "totalRow";
   totalRow.innerHTML = `
-    <td colspan="2" style="font-weight: bold;">TOTAL</td>
-    <td style="font-weight: bold;" id="totalAmount">${total.toFixed(2)}</td>
+    <td colspan="2">TOTAL</td>
+    <td id="totalAmount">${total.toFixed(2)}</td>
     <td class="action-column"></td>
   `;
 
