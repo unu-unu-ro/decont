@@ -200,11 +200,7 @@ img[alt="Uploaded Logo"],
   justify-content: flex-start;
   margin-bottom: 20px;
   padding: 10px 0;
-}
-
-.header-logo {
-  height: 50px;
-  margin-right: 20px;
+  gap: 10px;
 }
 
 .main-header h1 {
@@ -258,7 +254,7 @@ img[alt="Uploaded Logo"],
 }
 
 /* For desktop/tablet (default): labels on left */
-@media screen and (min-width: 430px) {
+@media screen and (min-width: 500px) {
   .form-field {
     flex-direction: row;
     align-items: center;
