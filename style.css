@@ -25,7 +25,7 @@ h1 {
   color: #101b8b;
   text-align: center;
   margin-bottom: 10px;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 
@@ -191,6 +191,26 @@ img[alt="Uploaded Logo"],
 #submit-toolbar {
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+/* Header styling */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+.header-logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.main-header h1 {
+  margin: 0;
+  flex-grow: 1;
+  text-align: right;
 }
 
 @media screen and (max-width: 768px) {
@@ -450,8 +470,9 @@ table tfoot td {
   height: 200px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .legal-footer {
@@ -512,12 +533,14 @@ select:focus {
 /* Stilizare pentru tableSection pentru a se potrivi cu containerul */
 #tableSection {
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid #ddd;
+  border-radius: 8px;
   margin-top: 20px;
 }
 #tableSection h2 {
   margin-top: 0;
+  font-size: 1.2em;
+  color: #101b8b;
 }
 
 input[type="date"] {
@@ -586,4 +609,52 @@ select:invalid,
 textarea:invalid {
   border: 1px solid #f44336 !important;
   background-color: #fff0f0 !important;
+}
+
+/* Replace collapsible section styles with details/summary styles */
+.details-section {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.details-summary {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  list-style: none;
+}
+
+.details-summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-summary::after {
+  content: "▼";
+  float: right;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+details[open] .details-summary::after {
+  transform: rotate(180deg);
+}
+
+.details-summary:hover {
+  background-color: #e9e9e9;
+}
+
+.details-summary h3 {
+  display: inline;
+  margin: 0;
+  text-align: left;
+  color: #101b8b;
+  font-size: 1.1rem;
+}
+
+.details-content {
+  padding: 15px;
 }

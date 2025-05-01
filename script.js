@@ -27,6 +27,9 @@ const elements = {
   ibanholder: $("#ibanholder"),
   ibanlabel: $("#ibanlabel"),
 
+  // Details section
+  personalInfoSection: $("#personal-info-section"),
+
   // Alte elemente
   dataTableBody: $("#dataTable tbody"),
   dataTableFoot: $("#dataTable tfoot"),
@@ -90,6 +93,7 @@ function updateLivePreview() {
   localStorage.setItem("savedName", nameValue);
   localStorage.setItem("savedPaymentMethod", paymentMethodValue);
   localStorage.setItem("savedIban", iban);
+  localStorage.setItem("savedPurpose", purposeValue);
 
   elements.previewName.textContent = nameValue;
   elements.previewDate.textContent = formatDate(dateValue);
@@ -104,10 +108,48 @@ function updateLivePreview() {
   }
 }
 
+// Function to draw signature image on canvas
+function drawSignatureOnCanvas(canvas, imageSrc) {
+  const ctx = canvas.getContext("2d");
+  const scale = window.devicePixelRatio || 1;
+
+  const img = new Image();
+  img.onload = function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Calculate the proper dimensions to maintain aspect ratio while fitting within canvas
+    const canvasWidth = canvas.width / scale;
+    const canvasHeight = canvas.height / scale;
+
+    let drawWidth, drawHeight;
+    const imgRatio = img.width / img.height;
+    const canvasRatio = canvasWidth / canvasHeight;
+
+    if (imgRatio > canvasRatio) {
+      // Image is wider than canvas (relative to height)
+      drawWidth = canvasWidth;
+      drawHeight = canvasWidth / imgRatio;
+    } else {
+      // Image is taller than canvas (relative to width)
+      drawHeight = canvasHeight;
+      drawWidth = canvasHeight * imgRatio;
+    }
+
+    // Center the image on the canvas
+    const x = (canvasWidth - drawWidth) / 2;
+    const y = (canvasHeight - drawHeight) / 2;
+
+    ctx.drawImage(img, x, y, drawWidth, drawHeight);
+  };
+  img.src = imageSrc;
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   const savedName = localStorage.getItem("savedName");
   const savedPaymentMethod = localStorage.getItem("savedPaymentMethod");
   const savedIban = localStorage.getItem("savedIban");
+  const savedSignature = localStorage.getItem("savedSignature");
+  const savedPurpose = localStorage.getItem("savedPurpose");
 
   if (savedName) {
     elements.name.value = savedName;
@@ -126,6 +168,11 @@ window.addEventListener("DOMContentLoaded", () => {
     updateIbanValidation(savedIban);
   }
 
+  if (savedPurpose) {
+    elements.purpose.value = savedPurpose;
+    elements.previewPurpose.textContent = savedPurpose;
+  }
+
   // Asigură-te că starea IBAN-ului este corectă în funcție de modalitatea de plată
   const paymentMethodValue = elements.paymentMethod.value;
   if (paymentMethodValue === "Transfer bancar") {
@@ -135,13 +182,28 @@ window.addEventListener("DOMContentLoaded", () => {
     toggleIbanVisibility(false);
   }
 
+  if (savedSignature) {
+    elements.signature.src = savedSignature;
+    elements.signature.alt = "Semnătură";
+    signatureStatus = true;
+
+    drawSignatureOnCanvas(elements.canvas, savedSignature);
+  }
+
+  if (!savedName || (paymentMethodValue === "Transfer bancar" && (!savedIban || !isValidRomanianIBAN(savedIban)))) {
+    // Auto-open the details section if no name is saved or payment method is "Transfer bancar" without valid IBAN
+    elements.personalInfoSection.setAttribute("open", "open");
+  }
+
   // data - use local date to avoid timezone issues
   const currentDate = new Date();
   // Format date as YYYY-MM-DD using local date parts
   const year = currentDate.getFullYear();
   const month = String(currentDate.getMonth() + 1).padStart(2, "0");
   const day = String(currentDate.getDate()).padStart(2, "0");
-  elements.date.value = `${year}-${month}-${day}`;
+  const localDateString = `${year}-${month}-${day}`;
+
+  elements.date.value = localDateString;
   elements.previewDate.textContent = formatDate(currentDate);
 });
 
@@ -287,6 +349,9 @@ const saveButton = $("#saveSignature");
 // Salvează semnătura și numele în secțiunea din dreapta jos
 saveButton.addEventListener("click", () => {
   const dataURL = elements.canvas.toDataURL("image/png");
+
+  // Store signature in localStorage
+  localStorage.setItem("savedSignature", dataURL);
 
   // Afișează semnătura în img cu id="signature"
   elements.signature.src = dataURL;

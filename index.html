@@ -13,13 +13,55 @@
   </head>
   <body>
     <div class="container">
-      <h1>Decont Unu-Unu</h1>
+      <header class="main-header">
+        <img src="assets/logo.png" alt="Logo" class="header-logo" />
+        <h1>Decont Unu-Unu</h1>
+      </header>
 
       <form id="pdfForm">
-        <div class="form-field">
-          <label for="name">Nume:</label>
-          <input type="text" id="name" name="name" placeholder="Introdu numele" required minlength="5" maxlength="80" />
-        </div>
+        <details id="personal-info-section" class="details-section">
+          <summary class="details-summary">
+            <h3>👤 Informații personale</h3>
+          </summary>
+          <div class="details-content">
+            <div class="form-field">
+              <label for="name">Nume:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Introdu numele"
+                required
+                minlength="5"
+                maxlength="80"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="paymentMethod">Modalitate decontare:</label>
+              <select id="paymentMethod">
+                <option value="Transfer bancar" selected>Transfer bancar</option>
+                <option value="Numerar">Numerar</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="iban" id="ibanlabel">Cont IBAN:</label>
+              <input type="text" id="iban" name="iban" class="console-font" placeholder="Introdu IBAN" />
+            </div>
+
+            <!-- Signature section moved inside personal info -->
+            <div id="signatureSection">
+              <canvas id="signatureCanvas"></canvas>
+              <div class="tbar">
+                <label>Semnătură</label>
+                <div class="tfill"></div>
+                <button type="button" id="saveSignature" class="green-button">Aplică semnătura</button>
+                <button type="button" id="clearSignature" class="red-button">Resetează</button>
+              </div>
+            </div>
+          </div>
+        </details>
 
         <div class="form-field">
           <label for="date">Data:</label>
@@ -31,21 +73,8 @@
           <input type="text" id="purpose" name="purpose" required placeholder="Introdu scopul cheltuielilor" />
         </div>
 
-        <div class="form-field">
-          <label for="paymentMethod">Modalitate decontare:</label>
-          <select id="paymentMethod">
-            <option value="Transfer bancar" selected>Transfer bancar</option>
-            <option value="Numerar">Numerar</option>
-          </select>
-        </div>
-
-        <div class="form-field">
-          <label for="iban" id="ibanlabel">Cont IBAN:</label>
-          <input type="text" id="iban" class="console-font" placeholder="Introdu IBAN" />
-        </div>
-
         <div id="tableSection">
-          <h2>Adaugă documente</h2>
+          <h2>📄 Adaugă documente</h2>
           <div class="form-field">
             <label for="document">Document:</label>
             <select id="document">
@@ -67,16 +96,6 @@
           <div class="tbar">
             <div class="tfill"></div>
             <button type="button" class="blue-button" id="addToTable">Adaugă</button>
-          </div>
-        </div>
-
-        <div id="signatureSection">
-          <h3>Semnătură</h3>
-          <canvas id="signatureCanvas"></canvas>
-          <div class="tbar">
-            <div class="tfill"></div>
-            <button type="button" id="saveSignature" class="green-button">Aplică semnătura</button>
-            <button type="button" id="clearSignature" class="red-button">Resetează</button>
           </div>
         </div>
 
