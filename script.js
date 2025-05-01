@@ -154,6 +154,9 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedName) {
     elements.name.value = savedName;
     elements.previewName.textContent = savedName;
+    if (savedSignature) {
+      elements.signatureName.textContent = savedName;
+    }
   }
 
   if (savedPaymentMethod) {
@@ -343,11 +346,8 @@ clearButton.addEventListener("click", () => {
   signatureStatus = false; // Reset signature status
 });
 
-// Salvează semnătura ca imagine
-const saveButton = $("#saveSignature");
-
 // Salvează semnătura și numele în secțiunea din dreapta jos
-saveButton.addEventListener("click", () => {
+$("#saveSignature").addEventListener("click", () => {
   const dataURL = elements.canvas.toDataURL("image/png");
 
   // Store signature in localStorage
