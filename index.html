@@ -15,7 +15,9 @@
     <div class="container">
       <header class="main-header">
         <img src="assets/logo.png" alt="Logo 1-1" height="50" width="50" />
-        <h1>Decont Unu-Unu</h1>
+        <div>
+          <h1>Decont Unu-Unu</h1>
+        </div>
       </header>
 
       <form id="pdfForm">
@@ -34,6 +36,7 @@
                 required
                 minlength="5"
                 maxlength="80"
+                autocomplete="name"
               />
             </div>
 
@@ -47,7 +50,14 @@
 
             <div class="form-field">
               <label for="iban" id="ibanlabel">Cont IBAN:</label>
-              <input type="text" id="iban" name="iban" class="console-font" placeholder="Introdu IBAN" />
+              <input
+                type="text"
+                id="iban"
+                name="iban"
+                class="console-font"
+                placeholder="Introdu IBAN"
+                autocomplete="on"
+              />
             </div>
 
             <!-- Signature section moved inside personal info -->
@@ -70,7 +80,14 @@
 
         <div class="form-field">
           <label for="purpose">Scop cheltuieli:</label>
-          <input type="text" id="purpose" name="purpose" required placeholder="Introdu scopul cheltuielilor" />
+          <input
+            type="text"
+            id="purpose"
+            name="purpose"
+            required
+            placeholder="Introdu scopul cheltuielilor"
+            autocomplete="on"
+          />
         </div>
 
         <div id="tableSection">
