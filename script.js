@@ -49,6 +49,9 @@ function toggleIbanVisibility(visible) {
   elements.iban.style.display = display;
   elements.ibanlabel.style.display = display;
 
+  // Set the required attribute based on visibility
+  elements.iban.required = visible;
+
   if (!visible) {
     elements.previewIban.textContent = "";
   }
