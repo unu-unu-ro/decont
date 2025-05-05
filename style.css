@@ -527,13 +527,15 @@ select:focus {
 }
 
 /* Stilizare pentru tableSection pentru a se potrivi cu containerul */
-#tableSection {
+#tableSection,
+#dateSection {
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-top: 20px;
 }
-#tableSection h2 {
+#tableSection h2,
+#dateSection h2 {
   margin-top: 0;
   font-size: 1.2em;
   color: #101b8b;
