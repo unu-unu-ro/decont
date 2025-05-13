@@ -6,7 +6,9 @@ O micro-aplicație web pentru generarea rapidă de **deconturi PDF** pentru achi
 
 ## 🚨 Accesează aplicația live aici:
 
-👉 **[🔗 unu-unu-ro.github.io/decont](https://unu-unu-ro.github.io/decont/)**
+[![Live](https://img.shields.io/badge/Vezi_live-unu--unu--ro.github.io/decont-brightgreen?style=for-the-badge)](https://unu-unu-ro.github.io/decont/)
+
+![GitHub last commit](https://img.shields.io/github/last-commit/unu-unu-ro/decont?style=for-the-badge&color=brown)
 
 ---
 
