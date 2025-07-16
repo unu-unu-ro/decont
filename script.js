@@ -390,5 +390,9 @@ $("#pdfForm").addEventListener("submit", function (event) {
     return;
   }
 
+  // Update document title with current date in ISO format for easy sorting / finding
+  const isoDate = new Date().toISOString().split("T")[0]; // Gets YYYY-MM-DD format
+  document.title = `${isoDate} Decont Unu-Unu`;
+
   window.print();
 });
